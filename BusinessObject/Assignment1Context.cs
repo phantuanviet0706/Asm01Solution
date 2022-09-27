@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace BusinessObject
 {
@@ -25,8 +26,9 @@ namespace BusinessObject
         {
             if (!optionsBuilder.IsConfigured)
             {
+                string connstr = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetConnectionString("Asm01DB").ToString();
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("server=(local);database=Assignment1;uid=sa;pwd=12345678");
+                optionsBuilder.UseSqlServer(connstr);
             }
         }
 
