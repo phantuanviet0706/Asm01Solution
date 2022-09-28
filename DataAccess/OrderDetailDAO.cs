@@ -48,7 +48,8 @@ namespace DataAccess
             try
             {
                 var asm1DB = new Assignment1Context();
-                orderDetail = asm1DB.OrderDetails.SingleOrDefault(orderDetail => orderDetail.OrderId == oid);
+                orderDetail = asm1DB.OrderDetails.Where(orderDetail => orderDetail.OrderId == oid)
+                    .Where(orderDetail => orderDetail.ProductId == pid).FirstOrDefault();
             }
             catch (Exception ex)
             {
