@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="WindowLogin" Height="450" Width="800">
     <Grid>
-        
+        <Canvas Margin="0,-10,0,10">
+            <Canvas Margin="0,-10,0,10" Name="loginField">
+                <TextBox Name="Email" Height="40" Width="323" Canvas.Left="240" Canvas.Top="89"></TextBox>
+                <PasswordBox Name="Password" Height="40" Width="324" Canvas.Left="239" Canvas.Top="177" />
+                <Label Content="Password" Canvas.Left="239" Canvas.Top="146"/>
+                <Label Content="Email" Canvas.Left="240" Canvas.Top="58"/>
+            </Canvas>
+            <Button Name="LoginBtn" Content="Login" Canvas.Left="312" Canvas.Top="279" Height="44" Width="176"
+                    />
+        </Canvas>
     </Grid>
 </Window>
