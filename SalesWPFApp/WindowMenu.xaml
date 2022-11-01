@@ -45,7 +45,8 @@
                             <TextBox x:Name="txtEmail" Width="300"
                                      Height="25" VerticalAlignment="Top"
                                      HorizontalAlignment="Left"
-                                     Margin="300, 10, 0, 0"/>
+                                     Margin="300, 10, 0, 0"
+                                     Text="{Binding Email}"/>
 
                             <TextBlock Text="Password" FontSize="14"
                                    Width="150" VerticalAlignment="Top"
@@ -54,7 +55,15 @@
                             <PasswordBox x:Name="txtPassword" Width="300"
                                      Height="25" VerticalAlignment="Top"
                                      HorizontalAlignment="Left"
-                                     Margin="300, 50, 0, 0"/>
+                                     Margin="300, 50, 0, 0">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PasswordChanged">
+                                        <i:InvokeCommandAction
+                                    Command="{Binding PasswordChangedCommand}"
+                                    CommandParameter="{Binding ElementName=txtPassword}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </PasswordBox>
 
                             <TextBlock Text="Company Name" FontSize="14"
                                    Width="150" VerticalAlignment="Top"
@@ -63,7 +72,8 @@
                             <TextBox x:Name="txtCompany" Width="300"
                                      Height="25" VerticalAlignment="Top"
                                      HorizontalAlignment="Left"
-                                     Margin="300, 90, 0, 0"/>
+                                     Margin="300, 90, 0, 0"
+                                     Text="{Binding CompanyName}"/>
 
                             <TextBlock Text="City" FontSize="14"
                                    Width="150" VerticalAlignment="Top"
@@ -72,7 +82,8 @@
                             <TextBox x:Name="txtCity" Width="300"
                                      Height="25" VerticalAlignment="Top"
                                      HorizontalAlignment="Left"
-                                     Margin="300, 130, 0, 0"/>
+                                     Margin="300, 130, 0, 0"
+                                     Text="{Binding City}"/>
 
                             <TextBlock Text="Country" FontSize="14"
                                    Width="150" VerticalAlignment="Top"
@@ -81,14 +92,15 @@
                             <TextBox x:Name="txtCountry" Width="300"
                                      Height="25" VerticalAlignment="Top"
                                      HorizontalAlignment="Left"
-                                     Margin="300, 170, 0, 0"/>
+                                     Margin="300, 170, 0, 0"
+                                     Text="{Binding Country}"/>
 
-                            
                         </Grid>
                         <Grid>
                             <Button Content="Add" Width="100" Height="30"
                                 HorizontalAlignment="Left" VerticalAlignment="Top"
-                                Margin="120, 40, 0 ,0"/>
+                                Margin="120, 40, 0 ,0" Command="{Binding AddMemberCommand}" 
+                                    CommandParameter="{Binding ElementName=mainWindow}"/>
                             <Button Content="Update" Width="100" Height="30"
                                 HorizontalAlignment="Center" VerticalAlignment="Top"
                                 Margin="0, 40, 0 ,0"/>
@@ -99,7 +111,12 @@
                     </StackPanel>
 
                     <DataGrid Grid.Row="1" IsReadOnly="True" ItemsSource="{Binding memberList, Mode=OneWay}"
-                              AutoGenerateColumns="False">
+                            SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" x:Name="dgvMember" AutoGenerateColumns="False">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="">
+                                <i:InvokeCommandAction/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" Header="Member Id" Binding="{Binding MemberId}"/>
                             <DataGridTextColumn Width="3*" Header="Email" Binding="{Binding Email}"/>
