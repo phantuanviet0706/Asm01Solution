@@ -4,16 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SalesWPFApp"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        Name="mainWindow"
         mc:Ignorable="d"
+        DataContext="{StaticResource MainVM}"
+        WindowStartupLocation="CenterScreen"
         Title="WindowMenu" Height="450" Width="800">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction 
+                Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=mainWindow}">
+            </i:InvokeCommandAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="41*"/>
             <ColumnDefinition Width="59*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Members" HorizontalAlignment="Left" Margin="119,181,0,0" VerticalAlignment="Top" Height="62" Width="122" Click="Button_Click"/>
-        <Button Content="Orders" HorizontalAlignment="Left" Margin="28,181,0,0" VerticalAlignment="Top" Height="62" Width="116" Grid.Column="1"/>
-        <Button Content="Products" HorizontalAlignment="Left" Margin="256,181,0,0" VerticalAlignment="Top" Height="62" Width="113" Grid.Column="1"/>
+        <Button Content="Members" HorizontalAlignment="Left" Margin="119,181,0,0" VerticalAlignment="Top" Height="62" Width="122" Command="{Binding MemberWindowCommand}"/>
+        <Button Content="Orders" HorizontalAlignment="Left" Margin="28,181,0,0" VerticalAlignment="Top" Height="62" Width="116" Grid.Column="1" Command="{Binding OrderWindowCommand}"/>
+        <Button Content="Products" HorizontalAlignment="Left" Margin="256,181,0,0" VerticalAlignment="Top" Height="62" Width="113" Grid.Column="1" Command="{Binding ProductWindowCommand}"/>
 
     </Grid>
 </Window>

@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SalesWPFApp"
+        Name="orderWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+       WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="WindowOrders" Height="450" Width="800">
+        Title="Order Management" Height="450" Width="800">
     <Grid>
         
     </Grid>
 </Window>
+

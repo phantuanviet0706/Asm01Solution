@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    internal class MemberRepository : IMemberRepository
+    public class MemberRepository : IMemberRepository
     {
         public Member GetMemberById(int memberId) => MemberDAO.Instance.GetMemberById(memberId);
         public IEnumerable<Member> GetMembers() => MemberDAO.Instance.GetMembersList();

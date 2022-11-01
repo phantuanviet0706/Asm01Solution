@@ -4,18 +4,36 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SalesWPFApp"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        Name="loginWindow"
+        DataContext="{StaticResource LoginVM}"
         mc:Ignorable="d"
-        Title="WindowLogin" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="Window Login" Height="400" Width="800">
+
+
+
     <Grid>
         <Canvas Margin="0,-10,0,10">
             <Canvas Margin="0,-10,0,10" Name="loginField">
-                <TextBox Name="Email" Height="40" Width="323" Canvas.Left="240" Canvas.Top="89"></TextBox>
-                <PasswordBox Name="Password" Height="40" Width="324" Canvas.Left="239" Canvas.Top="177" />
+                <TextBox Name="Email" Height="40" Width="323" Canvas.Left="240" Canvas.Top="89"
+                         Text="{Binding UserName}"></TextBox>
+                <PasswordBox Name="Password" Height="40" Width="324" Canvas.Left="239" Canvas.Top="177" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PasswordChanged">
+                            <i:InvokeCommandAction
+                                    Command="{Binding PasswordChangedCommand}"
+                                    CommandParameter="{Binding ElementName=Password}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </PasswordBox>
                 <Label Content="Password" Canvas.Left="239" Canvas.Top="146"/>
                 <Label Content="Email" Canvas.Left="240" Canvas.Top="58"/>
             </Canvas>
-            <Button Name="LoginBtn" Content="Login" Canvas.Left="312" Canvas.Top="279" Height="44" Width="176"
-                    />
+            <Button Name="LoginBtn" Content="Login" Canvas.Left="280" Canvas.Top="250" Height="44" Width="100"
+                    Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=loginWindow}"/>
+            <Button Name="CancelBtn" Content="Cancel" Canvas.Left="425" Canvas.Top="250" Height="44" Width="100"
+                    Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=loginWindow}"/>
         </Canvas>
     </Grid>
 </Window>

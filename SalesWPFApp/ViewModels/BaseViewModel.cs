@@ -7,19 +7,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace SalesWPFApp.ViewModel
+namespace SalesWPFApp.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-
-    class RelayCommand<T>
+    class RelayCommand<T> : ICommand
     {
         private readonly Predicate<T> _canExecute;
         private readonly Action<T> _execute;
@@ -34,7 +33,6 @@ namespace SalesWPFApp.ViewModel
 
         public bool CanExecute(object parameter)
         {
-
             try
             {
                 return _canExecute == null ? true : _canExecute((T)parameter);

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    internal class ProductRepository : IProductRepository
+    public class ProductRepository : IProductRepository
     {
         public Product GetProductById(int productId) => ProductDAO.Instance.GetProductById(productId);
         public IEnumerable<Product> GetProducts() => ProductDAO.Instance.GetProductsList();

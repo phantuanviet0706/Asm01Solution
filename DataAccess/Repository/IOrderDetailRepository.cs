@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    internal interface IOrderDetailRepository
+    public interface IOrderDetailRepository
     {
         IEnumerable<OrderDetail> GetOrderDetails();
         OrderDetail GetOrderDetail(int orderId, int productId);
