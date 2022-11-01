@@ -3,4 +3,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
+    <viewmodel:MemberViewModel x:Key="MemberVM"></viewmodel:MemberViewModel>
+    <viewmodel:OrderViewModel x:Key="OrderVM"></viewmodel:OrderViewModel>
+    <viewmodel:ProductViewModel x:Key="ProductVM"></viewmodel:ProductViewModel>
 </ResourceDictionary>

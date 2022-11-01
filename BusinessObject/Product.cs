@@ -25,7 +25,7 @@ namespace BusinessObject
         public decimal UnitPrice { get; set; }
 
         [Range(0,int.MaxValue, ErrorMessage = "INVALID_INT_NUMBER")]
-        public int UnitStock { get; set; }
+        public int UnitsInStock { get; set; }
 
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace SalesWPFApp.ViewModels
@@ -13,10 +14,20 @@ namespace SalesWPFApp.ViewModels
     {
         public bool IsLoaded = false;
         public ICommand LoadedWindowCommand { get; set; }
-        public ICommand MemberWindowCommand { get; set; }
-        public ICommand OrderWindowCommand { get; set; }
-        public ICommand ProductWindowCommand { get; set; }
+        public ICommand CloseCommand { get; set; }
+        public ICommand AddMemberCommand { get; set; }
+        public ICommand LoadedTabCommand { get; set; }
 
+        private int _selected;
+        public int Selected
+        {
+            get { return _selected; }
+            set
+            {
+                _selected = value;
+                OnPropertyChanged();
+            }
+        }
 
         public MainViewModel()
         {
@@ -47,9 +58,25 @@ namespace SalesWPFApp.ViewModels
                 }
             });
 
-            MemberWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) => { WindowMembers wd = new WindowMembers(); wd.ShowDialog(); });
-            OrderWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) => { WindowOrders wd = new WindowOrders(); wd.ShowDialog(); });
-            ProductWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) => { WindowProducts wd = new WindowProducts(); wd.ShowDialog(); });
+            CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                if (p == null)
+                {
+                    return;
+                }
+
+                if (MessageBox.Show("Do you want to exit?", "Exit", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    p.Close();
+                }
+            });
+
+
+            LoadedTabCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                var _index = p.DataContext as MainViewModel;
+                MessageBox.Show("Index " + _index.Selected);
+            });
         }
     }
 }

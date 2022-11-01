@@ -23,26 +23,5 @@ namespace SalesWPFApp
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            WindowMembers formMembers = new WindowMembers();
-            formMembers.Show();
-            this.Close();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            WindowOrders formOrders = new WindowOrders();
-            formOrders.Show();
-            this.Close();
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            WindowProducts formProducts = new WindowProducts();
-            formProducts.Show();
-            this.Close();
-        }
     }
 }

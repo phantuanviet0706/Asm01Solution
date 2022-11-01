@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         DataContext="{StaticResource MainVM}"
         WindowStartupLocation="CenterScreen"
-        Title="WindowMenu" Height="450" Width="800">
+        Title="WindowMenu" Height="700" Width="800">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -18,15 +18,268 @@
             </i:InvokeCommandAction>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="41*"/>
-            <ColumnDefinition Width="59*"/>
-        </Grid.ColumnDefinitions>
-        <Button Content="Members" HorizontalAlignment="Left" Margin="119,181,0,0" VerticalAlignment="Top" Height="62" Width="122" Command="{Binding MemberWindowCommand}"/>
-        <Button Content="Orders" HorizontalAlignment="Left" Margin="28,181,0,0" VerticalAlignment="Top" Height="62" Width="116" Grid.Column="1" Command="{Binding OrderWindowCommand}"/>
-        <Button Content="Products" HorizontalAlignment="Left" Margin="256,181,0,0" VerticalAlignment="Top" Height="62" Width="113" Grid.Column="1" Command="{Binding ProductWindowCommand}"/>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TabControl x:Name="tabWindow"
+                    SelectedIndex="{Binding Selected}">
+            <TabItem Header="Manage Members" Name="tabMember" DataContext="{StaticResource MemberVM}">
+                <Grid Background="#E5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,0,0,10">
+                        <TextBlock Text="Member Information" VerticalAlignment="Top" 
+                                   HorizontalAlignment="Center" FontSize="24"
+                                   Padding="0,15,0,0" FontWeight="Bold"/>
+                        <Grid>
+                            <TextBlock Text="Email" FontSize="14"
+                                   Width="150" VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,10,0,0"/>
+                            <TextBox x:Name="txtEmail" Width="300"
+                                     Height="25" VerticalAlignment="Top"
+                                     HorizontalAlignment="Left"
+                                     Margin="300, 10, 0, 0"/>
+
+                            <TextBlock Text="Password" FontSize="14"
+                                   Width="150" VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,50,0,0"/>
+                            <PasswordBox x:Name="txtPassword" Width="300"
+                                     Height="25" VerticalAlignment="Top"
+                                     HorizontalAlignment="Left"
+                                     Margin="300, 50, 0, 0"/>
+
+                            <TextBlock Text="Company Name" FontSize="14"
+                                   Width="150" VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,90,0,0"/>
+                            <TextBox x:Name="txtCompany" Width="300"
+                                     Height="25" VerticalAlignment="Top"
+                                     HorizontalAlignment="Left"
+                                     Margin="300, 90, 0, 0"/>
+
+                            <TextBlock Text="City" FontSize="14"
+                                   Width="150" VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,130,0,0"/>
+                            <TextBox x:Name="txtCity" Width="300"
+                                     Height="25" VerticalAlignment="Top"
+                                     HorizontalAlignment="Left"
+                                     Margin="300, 130, 0, 0"/>
+
+                            <TextBlock Text="Country" FontSize="14"
+                                   Width="150" VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,170,0,0"/>
+                            <TextBox x:Name="txtCountry" Width="300"
+                                     Height="25" VerticalAlignment="Top"
+                                     HorizontalAlignment="Left"
+                                     Margin="300, 170, 0, 0"/>
+
+                            
+                        </Grid>
+                        <Grid>
+                            <Button Content="Add" Width="100" Height="30"
+                                HorizontalAlignment="Left" VerticalAlignment="Top"
+                                Margin="120, 40, 0 ,0"/>
+                            <Button Content="Update" Width="100" Height="30"
+                                HorizontalAlignment="Center" VerticalAlignment="Top"
+                                Margin="0, 40, 0 ,0"/>
+                            <Button Content="Remove" Width="100" Height="30"
+                                HorizontalAlignment="Right" VerticalAlignment="Top"
+                                Margin="0, 40, 120 ,0"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <DataGrid Grid.Row="1" IsReadOnly="True" ItemsSource="{Binding memberList, Mode=OneWay}"
+                              AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="Member Id" Binding="{Binding MemberId}"/>
+                            <DataGridTextColumn Width="3*" Header="Email" Binding="{Binding Email}"/>
+                            <DataGridTextColumn Width="3*" Header="Company Name" Binding="{Binding CompanyName}"/>
+                            <DataGridTextColumn Width="2*" Header="City" Binding="{Binding City}"/>
+                            <DataGridTextColumn Width="2*" Header="Country" Binding="{Binding Country}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Manage Orders" Name="tabOrder" DataContext="{StaticResource OrderVM}">
+                <Grid Background="#E5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="6*"></RowDefinition>
+                        <RowDefinition Height="5*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,0,0,10">
+                        <TextBlock Text="Order Information" VerticalAlignment="Top" 
+                                   HorizontalAlignment="Center" FontSize="24"
+                                   Padding="0,15,0,0" FontWeight="Bold"/>
+                        <Grid>
+                            <TextBlock Text="Member ID" FontSize="14"
+                                   Width="150" VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,10,0,0"/>
+                            <TextBox x:Name="memberId" Width="300"
+                                     Height="25" VerticalAlignment="Top"
+                                     HorizontalAlignment="Left"
+                                     Margin="300, 10, 0, 0"/>
+
+                            <TextBlock Text="Order Date" FontSize="14"
+                                   Width="150" VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,50,0,0"/>
+                            <PasswordBox x:Name="orderDate" Width="300"
+                                     Height="25" VerticalAlignment="Top"
+                                     HorizontalAlignment="Left"
+                                     Margin="300, 50, 0, 0"/>
+
+                            <TextBlock Text="Require Date" FontSize="14"
+                                   Width="150" VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,90,0,0"/>
+                            <TextBox x:Name="requireDate" Width="300"
+                                     Height="25" VerticalAlignment="Top"
+                                     HorizontalAlignment="Left"
+                                     Margin="300, 90, 0, 0"/>
+
+                            <TextBlock Text="Shipped Date" FontSize="14"
+                                   Width="150" VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,130,0,0"/>
+                            <TextBox x:Name="shippedDate" Width="300"
+                                     Height="25" VerticalAlignment="Top"
+                                     HorizontalAlignment="Left"
+                                     Margin="300, 130, 0, 0"/>
+
+                            <TextBlock Text="Freight" FontSize="14"
+                                   Width="150" VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,170,0,0"/>
+                            <TextBox x:Name="freight" Width="300"
+                                     Height="25" VerticalAlignment="Top"
+                                     HorizontalAlignment="Left"
+                                     Margin="300, 170, 0, 0"/>
+                        </Grid>
+                        <Grid>
+                            <Button Content="Add" Width="100" Height="30"
+                                HorizontalAlignment="Left" VerticalAlignment="Top"
+                                Margin="120, 30, 0 ,0"/>
+                            <Button Content="Update" Width="100" Height="30"
+                                HorizontalAlignment="Center" VerticalAlignment="Top"
+                                Margin="0, 30, 0 ,0"/>
+                            <Button Content="Remove" Width="100" Height="30"
+                                HorizontalAlignment="Right" VerticalAlignment="Top"
+                                Margin="0, 30, 120 ,0"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <DataGrid Grid.Row="1" IsReadOnly="True" ItemsSource="{Binding ordersList, Mode=OneWay}"
+                              AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="Id" Binding="{Binding OrderId}"/>
+                            <DataGridTextColumn Width="3*" Header="Member ID" Binding="{Binding MemberId}"/>
+                            <DataGridTextColumn Width="3*" Header="Order Date" Binding="{Binding OrderDate}"/>
+                            <DataGridTextColumn Width="2*" Header="Require Date" Binding="{Binding RequireDate}"/>
+                            <DataGridTextColumn Width="2*" Header="Shipped Date" Binding="{Binding ShippedDate}"/>
+                            <DataGridTextColumn Width="2*" Header="Freight" Binding="{Binding Freight}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Manage Products" Name="tabProduct" DataContext="{StaticResource ProductVM}">
+                <Grid Background="#E5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="7*"></RowDefinition>
+                        <RowDefinition Height="6*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,0,0,10">
+                        <TextBlock Text="Member Information" VerticalAlignment="Top" 
+                                   HorizontalAlignment="Center" FontSize="24"
+                                   Padding="0,15,0,0" FontWeight="Bold"/>
+                        <Grid>
+                            <TextBlock Text="Category Id" FontSize="14"
+                                   Width="150" VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,10,0,0"/>
+                            <TextBox x:Name="txtCatID" Width="300"
+                                     Height="25" VerticalAlignment="Top"
+                                     HorizontalAlignment="Left"
+                                     Margin="300, 10, 0, 0"/>
+
+                            <TextBlock Text="Product Name" FontSize="14"
+                                   Width="150" VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,50,0,0"/>
+                            <PasswordBox x:Name="txtProductName" Width="300"
+                                     Height="25" VerticalAlignment="Top"
+                                     HorizontalAlignment="Left"
+                                     Margin="300, 50, 0, 0"/>
+
+                            <TextBlock Text="Weight" FontSize="14"
+                                   Width="150" VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,90,0,0"/>
+                            <TextBox x:Name="txtWeight" Width="300"
+                                     Height="25" VerticalAlignment="Top"
+                                     HorizontalAlignment="Left"
+                                     Margin="300, 90, 0, 0"/>
+
+                            <TextBlock Text="Unit Price" FontSize="14"
+                                   Width="150" VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,130,0,0"/>
+                            <TextBox x:Name="txtUnitPrice" Width="300"
+                                     Height="25" VerticalAlignment="Top"
+                                     HorizontalAlignment="Left"
+                                     Margin="300, 130, 0, 0"/>
+
+                            <TextBlock Text="Units In Stock" FontSize="14"
+                                   Width="150" VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,170,0,0"/>
+                            <TextBox x:Name="txtUnitsInStock" Width="300"
+                                     Height="25" VerticalAlignment="Top"
+                                     HorizontalAlignment="Left"
+                                     Margin="300, 170, 0, 0"/>
+
+
+                        </Grid>
+                        <Grid>
+                            <Button Content="Add" Width="100" Height="30"
+                                HorizontalAlignment="Left" VerticalAlignment="Top"
+                                Margin="120, 20, 0 ,0"/>
+                            <Button Content="Update" Width="100" Height="30"
+                                HorizontalAlignment="Center" VerticalAlignment="Top"
+                                Margin="0, 20, 0 ,0"/>
+                            <Button Content="Remove" Width="100" Height="30"
+                                HorizontalAlignment="Right" VerticalAlignment="Top"
+                                Margin="0, 20, 120 ,0"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <DataGrid Grid.Row="1" IsReadOnly="True" ItemsSource="{Binding productsList, Mode=OneWay}"
+                              AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="Id" Binding="{Binding ProductId}"/>
+                            <DataGridTextColumn Width="3*" Header="Category Id" Binding="{Binding CategoryId}"/>
+                            <DataGridTextColumn Width="3*" Header="Product Name" Binding="{Binding ProductName}"/>
+                            <DataGridTextColumn Width="2*" Header="Weight" Binding="{Binding Weight}"/>
+                            <DataGridTextColumn Width="2*" Header="Unit Price" Binding="{Binding UnitPrice}"/>
+                            <DataGridTextColumn Width="2*" Header="Units In Stock" Binding="{Binding UnitsInStock}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <Button x:Name="btnClose" Grid.Row="1" Width="80px" VerticalAlignment="Top"
+                HorizontalAlignment="Right" Content="Close" Margin="0,10,20,0"
+                Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=mainWindow}"></Button>
     </Grid>
 </Window>
