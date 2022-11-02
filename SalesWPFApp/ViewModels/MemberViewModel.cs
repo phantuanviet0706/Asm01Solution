@@ -7,6 +7,7 @@ using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +17,9 @@ namespace SalesWPFApp.ViewModels
 {
     public class MemberViewModel : BaseViewModel
     {
+        private int _memberId;
+        public int MemberId { get => _memberId; set { _memberId = value; OnPropertyChanged(); } }
+
         private string _email;
         public string Email { get => _email; set { _email = value; OnPropertyChanged(); } }
 
@@ -34,6 +38,8 @@ namespace SalesWPFApp.ViewModels
 
         MemberRepository memberRepository;
         public ICommand AddMemberCommand { get; set; }
+        public ICommand UpdateMemberCommand { get; set; }
+        public ICommand RemoveMemberCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public ObservableCollection<Member> memberList { get; set; }
         public ICommand PasswordChangedCommand { get; set; }
@@ -44,10 +50,11 @@ namespace SalesWPFApp.ViewModels
             get => _selectedItem;
             set
             {
-                _selectedItem = value; 
+                _selectedItem = value;
                 OnPropertyChanged();
-                if(SelectedItem != null)
+                if (SelectedItem != null)
                 {
+                    MemberId = SelectedItem.MemberId;
                     Email = SelectedItem.Email;
                     CompanyName = SelectedItem.CompanyName;
                     City = SelectedItem.City;
@@ -71,9 +78,9 @@ namespace SalesWPFApp.ViewModels
                     return;
                 }
 
-                if (Password == null)
+                var validate = ValidateData(Email, CompanyName, City, Country, Password);
+                if (validate == 1)
                 {
-                    MessageBox.Show("Mật khẩu không được để trống!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 string passEncode = MD5Hash(Base64Encode(Password));
@@ -90,6 +97,54 @@ namespace SalesWPFApp.ViewModels
                 loadMemberList();
             });
 
+            UpdateMemberCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                if (p == null)
+                {
+                    return;
+                }
+                var validate = ValidateData(Email, CompanyName, City, Country, Password);
+                if (validate == 1)
+                {
+                    return;
+                }
+                string passEncode = MD5Hash(Base64Encode(Password));
+                Member member = new Member(MemberId, Email, CompanyName, City, Country, Password);
+                try
+                {
+                    memberRepository.UpdateMember(member);
+                    MessageBox.Show("Sửa thông tin thành viên thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.None);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                loadMemberList();
+            });
+
+            RemoveMemberCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                if (p == null)
+                {
+                    return;
+                }
+
+                if (MessageBox.Show("Bạn có chắc là muốn xóa thành viên này không?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        memberRepository.DeleteMember(MemberId);
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    loadMemberList();
+                }
+            });
+
             CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 if (p == null)
@@ -98,6 +153,48 @@ namespace SalesWPFApp.ViewModels
                 }
                 p.Close();
             });
+        }
+
+        private int ValidateData(string email, string companyName, string city, string country, string password)
+        {
+            var count = 0;
+            if (email == "" || email == null)
+            {
+                MessageBox.Show("Email không được để trống!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return ++count;
+            }
+            var match = Regex.Match(email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            if (!match.Success)
+            {
+                MessageBox.Show("Sai định dạng email!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return ++count;
+            }
+
+            if (password == "" || password == null)
+            {
+                MessageBox.Show("Mật khẩu không được để trống!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return ++count;
+            }
+
+            if (companyName == "" || companyName == null)
+            {
+                MessageBox.Show("Tên công ty không được để trống!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return ++count;
+            }
+
+            if (city == "" || city == null)
+            {
+                MessageBox.Show("Không được để trống tên thành phố!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return ++count;
+            }
+
+            if (country == "" || country == null)
+            {
+                MessageBox.Show("Không được để trống tên quốc gia!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return ++count;
+            }
+
+            return count;
         }
 
         public void loadMemberList()
@@ -127,5 +224,6 @@ namespace SalesWPFApp.ViewModels
             }
             return hash.ToString();
         }
+
     }
 }

@@ -103,10 +103,12 @@
                                     CommandParameter="{Binding ElementName=mainWindow}"/>
                             <Button Content="Update" Width="100" Height="30"
                                 HorizontalAlignment="Center" VerticalAlignment="Top"
-                                Margin="0, 40, 0 ,0"/>
+                                Margin="0, 40, 0 ,0" Command="{Binding UpdateMemberCommand}"
+                                    CommandParameter="{Binding ElementName=mainWindow}"/>
                             <Button Content="Remove" Width="100" Height="30"
                                 HorizontalAlignment="Right" VerticalAlignment="Top"
-                                Margin="0, 40, 120 ,0"/>
+                                Margin="0, 40, 120 ,0" Command="{Binding RemoveMemberCommand}"
+                                    CommandParameter="{Binding ElementName=mainWindow}"/>
                         </Grid>
                     </StackPanel>
 
@@ -227,16 +229,17 @@
                             <TextBox x:Name="txtCatID" Width="300"
                                      Height="25" VerticalAlignment="Top"
                                      HorizontalAlignment="Left"
-                                     Margin="300, 10, 0, 0"/>
+                                     Margin="300, 10, 0, 0" Text="{Binding CategoryId}"/>
 
                             <TextBlock Text="Product Name" FontSize="14"
                                    Width="150" VerticalAlignment="Top"
                                    HorizontalAlignment="Left"
                                    Margin="150,50,0,0"/>
-                            <PasswordBox x:Name="txtProductName" Width="300"
+                            <TextBox x:Name="txtProductName" Width="300"
                                      Height="25" VerticalAlignment="Top"
                                      HorizontalAlignment="Left"
-                                     Margin="300, 50, 0, 0"/>
+                                     Margin="300, 50, 0, 0"
+                                     Text="{Binding ProductName}"/>
 
                             <TextBlock Text="Weight" FontSize="14"
                                    Width="150" VerticalAlignment="Top"
@@ -245,7 +248,8 @@
                             <TextBox x:Name="txtWeight" Width="300"
                                      Height="25" VerticalAlignment="Top"
                                      HorizontalAlignment="Left"
-                                     Margin="300, 90, 0, 0"/>
+                                     Margin="300, 90, 0, 0"
+                                     Text="{Binding Weight}"/>
 
                             <TextBlock Text="Unit Price" FontSize="14"
                                    Width="150" VerticalAlignment="Top"
@@ -254,7 +258,8 @@
                             <TextBox x:Name="txtUnitPrice" Width="300"
                                      Height="25" VerticalAlignment="Top"
                                      HorizontalAlignment="Left"
-                                     Margin="300, 130, 0, 0"/>
+                                     Margin="300, 130, 0, 0"
+                                     Text="{Binding UnitPrice}"/>
 
                             <TextBlock Text="Units In Stock" FontSize="14"
                                    Width="150" VerticalAlignment="Top"
@@ -263,24 +268,29 @@
                             <TextBox x:Name="txtUnitsInStock" Width="300"
                                      Height="25" VerticalAlignment="Top"
                                      HorizontalAlignment="Left"
-                                     Margin="300, 170, 0, 0"/>
+                                     Margin="300, 170, 0, 0"
+                                     Text="{Binding UnitsInStock}"/>
 
 
                         </Grid>
                         <Grid>
                             <Button Content="Add" Width="100" Height="30"
                                 HorizontalAlignment="Left" VerticalAlignment="Top"
-                                Margin="120, 20, 0 ,0"/>
+                                Margin="120, 20, 0 ,0" Command="{Binding AddProductCommand}"
+                                    CommandParameter="{Binding ElementName=mainWindow}"/>
                             <Button Content="Update" Width="100" Height="30"
                                 HorizontalAlignment="Center" VerticalAlignment="Top"
-                                Margin="0, 20, 0 ,0"/>
+                                Margin="0, 20, 0 ,0" Command="{Binding UpdateProductCommand}"
+                                    CommandParameter="{Binding ElementName=mainWindow}"/>
                             <Button Content="Remove" Width="100" Height="30"
                                 HorizontalAlignment="Right" VerticalAlignment="Top"
-                                Margin="0, 20, 120 ,0"/>
+                                Margin="0, 20, 120 ,0" Command="{Binding DeleteProductCommand}"
+                                    CommandParameter="{Binding ElementName=mainWindow}"/>
                         </Grid>
                     </StackPanel>
 
                     <DataGrid Grid.Row="1" IsReadOnly="True" ItemsSource="{Binding productsList, Mode=OneWay}"
+                              SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"
                               AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" Header="Id" Binding="{Binding ProductId}"/>

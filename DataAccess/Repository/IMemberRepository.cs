@@ -13,6 +13,6 @@ namespace DataAccess.Repository
         Member GetMemberById(int memberId);
         void InsertMember(Member member);
         void UpdateMember(Member member);
-        void DeleteMember(Member member);
+        void DeleteMember(int memberId);
     }
 }

@@ -101,15 +101,15 @@ namespace DataAccess
             }
         }
 
-        public void DeleteMember(Member member)
+        public void DeleteMember(int memberID)
         {
             try
             {
-                Member _member = GetMemberById(member.MemberId);
+                Member _member = GetMemberById(memberID);
                 if (_member != null)
                 {
                     var asm1DB = new Assignment1Context();
-                    asm1DB.Members.Remove(member);
+                    asm1DB.Members.Remove(_member);
                     asm1DB.SaveChanges();
                 }
                 else

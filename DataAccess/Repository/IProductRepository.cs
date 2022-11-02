@@ -13,6 +13,6 @@ namespace DataAccess.Repository
         Product GetProductById(int productId);
         void InsertProduct(Product product);
         void UpdateProduct(Product product);
-        void DeleteProduct(Product product);
+        void DeleteProduct(int productId);
     }
 }

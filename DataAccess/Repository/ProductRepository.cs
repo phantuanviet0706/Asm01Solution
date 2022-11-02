@@ -13,6 +13,6 @@ namespace DataAccess.Repository
         public IEnumerable<Product> GetProducts() => ProductDAO.Instance.GetProductsList();
         public void InsertProduct(Product product) => ProductDAO.Instance.AddNew(product);
         public void UpdateProduct(Product product) => ProductDAO.Instance.UpdateProduct(product);
-        public void DeleteProduct(Product product) => ProductDAO.Instance.DeleteProduct(product);
+        public void DeleteProduct(int productId) => ProductDAO.Instance.DeleteProduct(productId);
     }
 }

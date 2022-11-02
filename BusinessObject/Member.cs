@@ -41,6 +41,16 @@ namespace BusinessObject
             Orders = orders;
         }
 
+        public Member(int memberId, string email, string companyName, string city, string country, string password)
+        {
+            MemberId = memberId;
+            Email = email;
+            CompanyName = companyName;
+            City = city;
+            Country = country;
+            Password = password;
+        }
+
         public Member(string email, string companyName, string city, string country, string password)
         {
             Email = email;

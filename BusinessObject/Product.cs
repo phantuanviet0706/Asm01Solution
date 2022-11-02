@@ -28,5 +28,35 @@ namespace BusinessObject
         public int UnitsInStock { get; set; }
 
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+
+        public Product(int productId, int categoryId, string productName, string weight, decimal unitPrice, int unitsInStock, ICollection<OrderDetail> orderDetails)
+        {
+            ProductId = productId;
+            CategoryId = categoryId;
+            ProductName = productName;
+            Weight = weight;
+            UnitPrice = unitPrice;
+            UnitsInStock = unitsInStock;
+            OrderDetails = orderDetails;
+        }
+
+        public Product(int productId, int categoryId, string productName, string weight, decimal unitPrice, int unitsInStock)
+        {
+            ProductId = productId;
+            CategoryId = categoryId;
+            ProductName = productName;
+            Weight = weight;
+            UnitPrice = unitPrice;
+            UnitsInStock = unitsInStock;
+        }
+
+        public Product(int categoryId, string productName, string weight, decimal unitPrice, int unitsInStock)
+        {
+            CategoryId = categoryId;
+            ProductName = productName;
+            Weight = weight;
+            UnitPrice = unitPrice;
+            UnitsInStock = unitsInStock;
+        }
     }
 }

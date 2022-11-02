@@ -13,6 +13,6 @@ namespace DataAccess.Repository
         public IEnumerable<Member> GetMembers() => MemberDAO.Instance.GetMembersList();
         public void InsertMember(Member member) => MemberDAO.Instance.AddNew(member);
         public void UpdateMember(Member member) => MemberDAO.Instance.UpdateMember(member);
-        public void DeleteMember(Member member) => MemberDAO.Instance.DeleteMember(member);
+        public void DeleteMember(int memberId) => MemberDAO.Instance.DeleteMember(memberId);
     }
 }

@@ -101,15 +101,15 @@ namespace DataAccess
             }
         }
 
-        public void DeleteProduct(Product product)
+        public void DeleteProduct(int productId)
         {
             try
             {
-                Product _product = GetProductById(product.ProductId);
+                Product _product = GetProductById(productId);
                 if (_product != null)
                 {
                     var asm1DB = new Assignment1Context();
-                    asm1DB.Products.Remove(product);
+                    asm1DB.Products.Remove(_product);
                     asm1DB.SaveChanges();
                 }
                 else
