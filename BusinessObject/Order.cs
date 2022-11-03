@@ -30,5 +30,36 @@ namespace BusinessObject
 
         public virtual Member Member { get; set; } = null!;
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+
+        public Order(int orderId, int memberId, DateTime orderDate, DateTime requireDate, DateTime shippedDate, decimal freight, Member member, ICollection<OrderDetail> orderDetails)
+        {
+            OrderId = orderId;
+            MemberId = memberId;
+            OrderDate = orderDate;
+            RequireDate = requireDate;
+            ShippedDate = shippedDate;
+            Freight = freight;
+            Member = member;
+            OrderDetails = orderDetails;
+        }
+
+        public Order(int orderId, int memberId, DateTime orderDate, DateTime requireDate, DateTime shippedDate, decimal freight)
+        {
+            OrderId = orderId;
+            MemberId = memberId;
+            OrderDate = orderDate;
+            RequireDate = requireDate;
+            ShippedDate = shippedDate;
+            Freight = freight;
+        }
+
+        public Order(int memberId, DateTime orderDate, DateTime requireDate, DateTime shippedDate, decimal freight)
+        {
+            MemberId = memberId;
+            OrderDate = orderDate;
+            RequireDate = requireDate;
+            ShippedDate = shippedDate;
+            Freight = freight;
+        }
     }
 }

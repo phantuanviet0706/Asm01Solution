@@ -13,6 +13,6 @@ namespace DataAccess.Repository
         Order GetOrderById(int orderId);
         void InsertOrder(Order order);
         void UpdateOrder(Order order);
-        void DeleteOrder(Order order);
+        void DeleteOrder(int orderId);
     }
 }

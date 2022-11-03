@@ -13,6 +13,6 @@ namespace DataAccess.Repository
         public IEnumerable<Order> GetOrders() => OrderDAO.Instance.GetOrdersList();
         public void InsertOrder(Order order) => OrderDAO.Instance.AddNew(order);
         public void UpdateOrder(Order order) => OrderDAO.Instance.UpdateOrder(order);
-        public void DeleteOrder(Order order) => OrderDAO.Instance.DeleteOrder(order);
+        public void DeleteOrder(int orderId) => OrderDAO.Instance.DeleteOrder(orderId);
     }
 }

@@ -147,34 +147,38 @@
                             <TextBox x:Name="memberId" Width="300"
                                      Height="25" VerticalAlignment="Top"
                                      HorizontalAlignment="Left"
-                                     Margin="300, 10, 0, 0"/>
+                                     Margin="300, 10, 0, 0"
+                                     Text="{Binding MemberId}"/>
 
                             <TextBlock Text="Order Date" FontSize="14"
                                    Width="150" VerticalAlignment="Top"
                                    HorizontalAlignment="Left"
                                    Margin="150,50,0,0"/>
-                            <PasswordBox x:Name="orderDate" Width="300"
+                            <DatePicker x:Name="orderDate" Width="300"
                                      Height="25" VerticalAlignment="Top"
                                      HorizontalAlignment="Left"
-                                     Margin="300, 50, 0, 0"/>
+                                     Margin="300, 50, 0, 0"
+                                        Text="{Binding OrderDate}"/>
 
                             <TextBlock Text="Require Date" FontSize="14"
                                    Width="150" VerticalAlignment="Top"
                                    HorizontalAlignment="Left"
                                    Margin="150,90,0,0"/>
-                            <TextBox x:Name="requireDate" Width="300"
+                            <DatePicker x:Name="requireDate" Width="300"
                                      Height="25" VerticalAlignment="Top"
                                      HorizontalAlignment="Left"
-                                     Margin="300, 90, 0, 0"/>
+                                     Margin="300, 90, 0, 0"
+                                        Text="{Binding RequireDate}"/>
 
                             <TextBlock Text="Shipped Date" FontSize="14"
                                    Width="150" VerticalAlignment="Top"
                                    HorizontalAlignment="Left"
                                    Margin="150,130,0,0"/>
-                            <TextBox x:Name="shippedDate" Width="300"
+                            <DatePicker x:Name="shippedDate" Width="300"
                                      Height="25" VerticalAlignment="Top"
                                      HorizontalAlignment="Left"
-                                     Margin="300, 130, 0, 0"/>
+                                     Margin="300, 130, 0, 0"
+                                        Text="{Binding ShippedDate}"/>
 
                             <TextBlock Text="Freight" FontSize="14"
                                    Width="150" VerticalAlignment="Top"
@@ -183,7 +187,8 @@
                             <TextBox x:Name="freight" Width="300"
                                      Height="25" VerticalAlignment="Top"
                                      HorizontalAlignment="Left"
-                                     Margin="300, 170, 0, 0"/>
+                                     Margin="300, 170, 0, 0"
+                                     Text="{Binding Freight}"/>
                         </Grid>
                         <Grid>
                             <Button Content="Add" Width="100" Height="30"
@@ -199,13 +204,14 @@
                     </StackPanel>
 
                     <DataGrid Grid.Row="1" IsReadOnly="True" ItemsSource="{Binding ordersList, Mode=OneWay}"
+                              SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"
                               AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" Header="Id" Binding="{Binding OrderId}"/>
-                            <DataGridTextColumn Width="3*" Header="Member ID" Binding="{Binding MemberId}"/>
-                            <DataGridTextColumn Width="3*" Header="Order Date" Binding="{Binding OrderDate}"/>
-                            <DataGridTextColumn Width="2*" Header="Require Date" Binding="{Binding RequireDate}"/>
-                            <DataGridTextColumn Width="2*" Header="Shipped Date" Binding="{Binding ShippedDate}"/>
+                            <DataGridTextColumn Width="2*" Header="Member ID" Binding="{Binding MemberId}"/>
+                            <DataGridTextColumn Width="4*" Header="Order Date" Binding="{Binding OrderDate}"/>
+                            <DataGridTextColumn Width="4*" Header="Require Date" Binding="{Binding RequireDate}"/>
+                            <DataGridTextColumn Width="4*" Header="Shipped Date" Binding="{Binding ShippedDate}"/>
                             <DataGridTextColumn Width="2*" Header="Freight" Binding="{Binding Freight}"/>
                         </DataGrid.Columns>
                     </DataGrid>

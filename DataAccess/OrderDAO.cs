@@ -101,15 +101,15 @@ namespace DataAccess
             }
         }
 
-        public void DeleteOrder(Order order)
+        public void DeleteOrder(int orderId)
         {
             try
             {
-                Order _order = GetOrderById(order.OrderId);
+                Order _order = GetOrderById(orderId);
                 if (_order != null)
                 {
                     var asm1DB = new Assignment1Context();
-                    asm1DB.Orders.Remove(order);
+                    asm1DB.Orders.Remove(_order);
                     asm1DB.SaveChanges();
                 }
                 else
